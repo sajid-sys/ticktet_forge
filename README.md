@@ -1,6 +1,17 @@
 # CricketTix — BAN vs WI Ticket Generator
 
-A single-page web app that mints match tickets for the Bangladesh vs West Indies series. Built with HTML, CSS, and vanilla JavaScript — no libraries, no build step, no backend.
+A single-page web app that mints match tickets for the Bangladesh vs West Indies series. Pick a match, type a name, and a unique `CTX-XXXXXX` code is ready in seconds. Built with HTML, CSS, and vanilla JavaScript — no libraries, no build step, no backend.
+
+## Features
+
+- One-screen bento layout: hero, stat tiles, form, ticket card, recent tickets.
+- Live form validation: name length and characters, match selection, code uniqueness.
+- Cryptographic 6-character codes via `crypto.getRandomValues`, formatted as `CTX-XXXXXX`.
+- Recent tickets persisted in `localStorage` (capped at 5, key `crickettix.recent`).
+- Copy-to-clipboard for any code, individual delete, and bulk clear.
+- Light and dark themes with a remembered preference (key `crickettix.theme`).
+- Hover and focus polish on tiles, ticket card, brand mark, and inputs.
+- Fully client-side — no network calls, no dependencies.
 
 ## Intuition
 
@@ -8,13 +19,15 @@ A match ticket only needs three things: a supporter's name, a match, and a code 
 
 ## Approach
 
-Three flat files do all the work:
+Three flat files do all the work, plus the team assets:
 
-- `index.html` — the bento layout, form, ticket card, recent-tickets list, and theme toggle.
+- `index.html` — the bento layout, hero, stat tiles, form, ticket card, recent-tickets list, and theme toggle.
 - `styles.css` — design tokens, light and dark themes, hover and focus polish, and the ticket's perforated-stub look.
 - `app.js` — validation, ticket-number generation, `localStorage` read and write, clipboard copy, and theme handling.
+- `bd-cric.png`, `west-indies.png` — Bangladesh Cricket Board and Cricket West Indies team crests shown in the hero.
+- `cricket-game-svgrepo-com.svg` — the brand mark in the header.
 
-Numbers come from `crypto.getRandomValues`, formatted as `CTX-XXXXXX`. Saved tickets are capped at 5 in `localStorage` under `crickettix.recent`, and the theme choice is kept under `crickettix.theme`.
+Randomness comes from `crypto.getRandomValues`, formatted as `CTX-XXXXXX`. Saved tickets are capped at 5 in `localStorage` under `crickettix.recent`, and the theme choice is kept under `crickettix.theme`.
 
 ## User Guide
 
