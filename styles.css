@@ -4,28 +4,28 @@
    ========================================================= */
 
 :root {
-  /* Dark (default) — deep forest, white + emerald accents */
-  --bg-0: #07120c;
-  --bg-1: #0c1a12;
-  --bg-2: #102218;
-  --surface: #11241a;
-  --surface-2: #16301f;
+  /* Dark (default) — Bangladesh green + white, WI maroon as accent */
+  --bg-0: #04140a;
+  --bg-1: #072012;
+  --bg-2: #0c2c19;
+  --surface: #0d2a18;
+  --surface-2: #11381f;
   --line: rgba(255, 255, 255, 0.08);
   --line-strong: rgba(255, 255, 255, 0.14);
-  --text: #ecf3ec;
-  --text-2: #a9b7ad;
-  --text-3: #6f8275;
-  --accent: #22c55e;
-  --accent-strong: #16a34a;
-  --accent-soft: rgba(34, 197, 94, 0.16);
-  --on-accent: #062a14;
-  --accent-2: #a7f3d0;
-  --accent-3: #f4fff8;
-  --paper: #f4f9f4;
-  --paper-2: #e6efe6;
+  --text: #f1f7f2;
+  --text-2: #a8bcae;
+  --text-3: #6c8273;
+  --accent: #00a878;
+  --accent-strong: #006a4e;
+  --accent-soft: rgba(0, 168, 120, 0.18);
+  --on-accent: #ffffff;
+  --accent-2: #7b1e1e;
+  --accent-3: #ffffff;
+  --paper: #ffffff;
+  --paper-2: #f1f7f2;
   --danger: #ff5c7a;
   --danger-soft: rgba(255, 92, 122, 0.12);
-  --success: #22c55e;
+  --success: #00a878;
   --warning: #ffc463;
   --shadow-card:
     0 1px 0 rgba(255, 255, 255, 0.04) inset,
@@ -38,53 +38,57 @@
   --radius-sm: 12px;
   --radius-lg: 24px;
   --grid-line: rgba(255, 255, 255, 0.035);
-  --orb-1: #1f7a3a;
-  --orb-2: #4ade80;
-  --orb-3: #bbf7d0;
-  --ticket-grad: linear-gradient(135deg, #16a34a 0%, #bbf7d0 100%);
+  --orb-1: #006a4e;
+  --orb-2: #00a878;
+  --orb-3: #ffffff;
+  --ticket-grad: linear-gradient(135deg, #006a4e 0%, #00a878 100%);
   --ticket-strip: rgba(255, 255, 255, 0.08);
-  --stub-grad: linear-gradient(160deg, #0d2316 0%, #08160e 100%);
-  --focus: 0 0 0 3px rgba(34, 197, 94, 0.45);
+  --stub-grad: linear-gradient(160deg, #0d2a18 0%, #04140a 100%);
+  --focus: 0 0 0 3px rgba(0, 168, 120, 0.45);
+  --bd: #006a4e;
+  --wi: #7b1e1e;
 }
 
 [data-theme="light"] {
-  --bg-0: #f4f8f4;
-  --bg-1: #ebf4ec;
+  --bg-0: #f4faf5;
+  --bg-1: #eaf5ed;
   --bg-2: #ffffff;
   --surface: #ffffff;
-  --surface-2: #eff7ef;
-  --line: rgba(15, 50, 28, 0.08);
-  --line-strong: rgba(15, 50, 28, 0.14);
-  --text: #0c1a12;
-  --text-2: #3d4f43;
-  --text-3: #7a8a7e;
-  --accent: #16a34a;
-  --accent-strong: #15803d;
-  --accent-soft: rgba(22, 163, 74, 0.12);
+  --surface-2: #ecf6ee;
+  --line: rgba(0, 80, 50, 0.08);
+  --line-strong: rgba(0, 80, 50, 0.14);
+  --text: #0a1f12;
+  --text-2: #3a4a3f;
+  --text-3: #75857a;
+  --accent: #006a4e;
+  --accent-strong: #014a37;
+  --accent-soft: rgba(0, 106, 78, 0.10);
   --on-accent: #ffffff;
-  --accent-2: #22c55e;
-  --accent-3: #0c1a12;
+  --accent-2: #7b1e1e;
+  --accent-3: #0a1f12;
   --paper: #ffffff;
-  --paper-2: #f4f8f4;
+  --paper-2: #f4faf5;
   --danger: #d33259;
   --danger-soft: rgba(211, 50, 89, 0.1);
-  --success: #16a34a;
+  --success: #006a4e;
   --warning: #d99700;
   --shadow-card:
     0 1px 0 rgba(255, 255, 255, 0.6) inset,
-    0 18px 50px -22px rgba(15, 50, 28, 0.18),
-    0 2px 6px rgba(15, 50, 28, 0.06);
+    0 18px 50px -22px rgba(0, 80, 50, 0.18),
+    0 2px 6px rgba(0, 80, 50, 0.06);
   --shadow-ticket:
-    0 30px 80px -20px rgba(15, 50, 28, 0.25),
+    0 30px 80px -20px rgba(0, 80, 50, 0.25),
     0 2px 0 rgba(255, 255, 255, 0.6) inset;
-  --grid-line: rgba(15, 50, 28, 0.045);
-  --orb-1: #86efac;
-  --orb-2: #bbf7d0;
-  --orb-3: #dcfce7;
-  --ticket-grad: linear-gradient(135deg, #16a34a 0%, #4ade80 100%);
-  --ticket-strip: rgba(15, 50, 28, 0.05);
-  --stub-grad: linear-gradient(160deg, #ffffff 0%, #ebf4ec 100%);
-  --focus: 0 0 0 3px rgba(22, 163, 74, 0.32);
+  --grid-line: rgba(0, 80, 50, 0.045);
+  --orb-1: #006a4e;
+  --orb-2: #00a878;
+  --orb-3: #ffffff;
+  --ticket-grad: linear-gradient(135deg, #006a4e 0%, #00a878 100%);
+  --ticket-strip: rgba(0, 80, 50, 0.05);
+  --stub-grad: linear-gradient(160deg, #ffffff 0%, #eaf5ed 100%);
+  --focus: 0 0 0 3px rgba(0, 106, 78, 0.32);
+  --bd: #006a4e;
+  --wi: #7b1e1e;
 }
 
 * { box-sizing: border-box; }
@@ -170,7 +174,7 @@ body {
   background: var(--ticket-grad);
   box-shadow: 0 8px 20px -8px rgba(22,163,74,0.55);
 }
-.brand-name span { color: var(--text-2); }
+.brand-name span { color: var(--accent); }
 .topnav { display: flex; gap: 4px; }
 .topnav a {
   color: var(--text-2); text-decoration: none;
@@ -223,7 +227,7 @@ body {
 [data-theme="light"] .toggle-thumb {
   transform: translateY(-50%) translateX(20px);
   background: #ffffff;
-  color: #16a34a;
+  color: var(--accent-strong);
 }
 [data-theme="light"] .toggle-thumb .icon-sun { display: block; }
 [data-theme="light"] .toggle-thumb .icon-moon { display: none; }
@@ -325,6 +329,38 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+.vs {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--bd);
+  padding: 0 4px;
+}
+.vs.wi { color: var(--wi); }
+.vs-x {
+  font: 600 0.42em 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-3);
+  padding: 0 8px;
+  vertical-align: 0.45em;
+}
+.crest {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px; height: 56px;
+  margin: 0 4px;
+  vertical-align: -0.18em;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.35));
+  transition: transform .25s ease;
+}
+.crest img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.crest svg { display: block; }
+.crest:hover { transform: translateY(-2px) scale(1.04); }
+[data-theme="light"] .crest {
+  filter: drop-shadow(0 6px 14px rgba(0,80,50,0.25));
 }
 .hero-sub {
   font-size: 15.5px; color: var(--text-2);
@@ -487,7 +523,7 @@ body {
   text-transform: uppercase; letter-spacing: 0.1em;
   background: var(--ticket-grad); color: var(--on-accent);
   padding: 6px 10px; border-radius: 8px;
-  box-shadow: 0 6px 18px -8px rgba(22,163,74,0.55);
+  box-shadow: 0 6px 18px -8px rgba(0,106,78,0.45);
 }
 
 .ticket {
@@ -635,6 +671,15 @@ body {
   border: 1px solid rgba(255,255,255,0.28);
   padding: 5px 10px; border-radius: 999px;
   backdrop-filter: blur(4px);
+}
+.series-tag {
+  font: 700 11px 'Space Grotesk', sans-serif;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  background: linear-gradient(90deg, var(--bd) 0%, var(--bd) 50%, var(--wi) 50%, var(--wi) 100%);
+  color: #fff;
+  padding: 5px 10px; border-radius: 999px;
+  margin-left: 10px;
+  box-shadow: 0 6px 18px -8px rgba(0,0,0,0.45);
 }
 .dot-glow {
   width: 10px; height: 10px; border-radius: 50%;

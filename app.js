@@ -7,8 +7,8 @@
   'use strict';
 
   // ---------- Constants ----------
-  const STORAGE_KEY = 'ticketforge.recent';
-  const THEME_KEY = 'ticketforge.theme';
+  const STORAGE_KEY = 'crickettix.recent';
+  const THEME_KEY = 'crickettix.theme';
   const MAX_TICKETS = 5;
   const NAME_MIN = 3;
   const NAME_MAX = 40;
@@ -16,11 +16,11 @@
   const NAME_REGEX = /^[A-Za-z ]+$/;
   const TICKET_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
-  // Venue map for the event essentials tile
+  // Stadium map for the match essentials tile
   const VENUES = {
-    'Web Dev Summit': 'Pier 12 — Hall A',
-    'AI Bootcamp': 'Tech Loft — Level 4',
-    'Design Night': 'The Atrium — Studio 2'
+    'T20I': 'Sher-e-Bangla Stadium, Mirpur',
+    'ODI': 'Zahur Ahmed Chowdhury Stadium, Chattogram',
+    'Test': 'Sylhet International Cricket Stadium'
   };
 
   // ---------- DOM ----------
@@ -49,7 +49,7 @@
   const tDate = $('#ticketDate');
   const tTag = $('#ticketTag');
   const tVenue = $('#ticketVenue');
-  const tCode = $('#ticketCode');
+  const tFormat = $('#ticketFormat');
 
   const recentList = $('#recentList');
   const emptyState = $('#emptyState');
@@ -98,9 +98,13 @@
   }
 
   function validateEvent(raw) {
-    if (!raw) return 'Please pick an event.';
-    const allowed = ['Web Dev Summit|12 Dec 2026', 'AI Bootcamp|19 Dec 2026', 'Design Night|26 Dec 2026'];
-    if (!allowed.includes(raw)) return 'That event is not on the list.';
+    if (!raw) return 'Please pick a match.';
+    const allowed = [
+      'T20I|14 Dec 2026|Mirpur',
+      'ODI|18 Dec 2026|Chattogram',
+      'Test|22 Dec 2026|Sylhet'
+    ];
+    if (!allowed.includes(raw)) return 'That match is not on the list.';
     return '';
   }
 
@@ -161,11 +165,11 @@
     const used = new Set(recent.map(t => t.no));
     // Reasonable bound to avoid runaway loops
     for (let i = 0; i < 200; i++) {
-      const no = 'TKT-' + randomCode(6);
+      const no = 'CTX-' + randomCode(6);
       if (!used.has(no)) return no;
     }
     // Fallback: timestamp-derived tail
-    return 'TKT-' + (Date.now().toString(36).toUpperCase().padStart(6, '0').slice(-6));
+    return 'CTX-' + (Date.now().toString(36).toUpperCase().padStart(6, '0').slice(-6));
   }
 
   // ---------- Render ----------
@@ -178,10 +182,10 @@
     return `${h}:${m} ${ampm}`;
   }
 
-  function eventTag(name) {
-    if (name === 'Web Dev Summit') return 'DEV';
-    if (name === 'AI Bootcamp') return 'AI';
-    if (name === 'Design Night') return 'DSN';
+  function eventTag(format) {
+    if (format === 'T20I') return 'T20';
+    if (format === 'ODI') return 'ODI';
+    if (format === 'Test') return 'TEST';
     return 'GA';
   }
 
@@ -194,9 +198,9 @@
     tNoStub.textContent = t.no;
     tEvent.textContent = t.event;
     tDate.textContent = t.date;
-    tTag.textContent = eventTag(t.event);
-    tVenue.textContent = VENUES[t.event] || '—';
-    tCode.textContent = t.no;
+    tTag.textContent = eventTag(t.format);
+    tVenue.textContent = VENUES[t.format] || '—';
+    tFormat.textContent = t.format;
   }
 
   function renderRecent() {
@@ -217,7 +221,7 @@
         emptyState.querySelector('h4').textContent = 'No matches';
         emptyState.querySelector('p').textContent = `Nothing in your recent tickets matches “${q}”.`;
       } else {
-        emptyState.querySelector('h4').textContent = 'No tickets yet';
+        emptyState.querySelector('h4').textContent = 'No match tickets yet';
         emptyState.querySelector('p').textContent = 'Issue your first ticket to see it appear here.';
       }
     } else {
@@ -288,12 +292,14 @@
       return;
     }
 
-    const [eventName, date] = eventSelect.value.split('|');
+    const [format, date, city] = eventSelect.value.split('|');
     const ticket = {
       no: uniqueTicketNumber(),
       name: nameInput.value.trim(),
-      event: eventName,
+      format: format,
+      event: format + ' — ' + city,
       date: date,
+      city: city,
       issuedAt: Date.now()
     };
 
@@ -379,7 +385,7 @@
 
   copyBtn.addEventListener('click', async () => {
     const no = tNo.textContent;
-    if (!no || no === 'TKT-——') return;
+    if (!no || no === 'CTX-——') return;
     const ok = await copyToClipboard(no);
     if (ok) {
       copyBtn.classList.add('copied');
