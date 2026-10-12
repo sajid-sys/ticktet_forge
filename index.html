@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ticket Forge — Digital Event Tickets</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="bg-aurora" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Ticket Forge home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <path d="M6 4h20v6a3 3 0 0 0 0 6v6H6v-6a3 3 0 0 0 0-6V4z"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M14 4v24" stroke="currentColor" stroke-width="2" stroke-dasharray="2 3" />
+        </svg>
+      </span>
+      <span class="brand-name">Ticket<span>Forge</span></span>
+    </a>
+
+    <nav class="topnav" aria-label="Primary">
+      <a href="#issue">Issue</a>
+      <a href="#recent">Recent</a>
+    </nav>
+
+    <div class="top-actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light mode">
+        <span class="toggle-track" aria-hidden="true">
+          <span class="toggle-thumb">
+            <svg class="icon-sun" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" fill="currentColor"/>
+              <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <line x1="12" y1="2" x2="12" y2="5"/>
+                <line x1="12" y1="19" x2="12" y2="22"/>
+                <line x1="2" y1="12" x2="5" y2="12"/>
+                <line x1="19" y1="12" x2="22" y2="12"/>
+                <line x1="4.2" y1="4.2" x2="6.3" y2="6.3"/>
+                <line x1="17.7" y1="17.7" x2="19.8" y2="19.8"/>
+                <line x1="4.2" y1="19.8" x2="6.3" y2="17.7"/>
+                <line x1="17.7" y1="6.3" x2="19.8" y2="4.2"/>
+              </g>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+              <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="currentColor"/>
+            </svg>
+          </span>
+        </span>
+        <span class="toggle-label" data-label-dark="Dark" data-label-light="Light">Dark</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="page">
+    <!-- HERO BENTO -->
+    <section class="bento hero" id="issue">
+      <article class="tile tile-hero">
+        <div class="tile-glow" aria-hidden="true"></div>
+        <div class="eyebrow-row">
+          <span class="status-pill">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            Live · Issuing
+          </span>
+          <span class="ticket-count" id="ticketCount" aria-live="polite">0 / 5 saved</span>
+        </div>
+        <h1 class="hero-title">
+          Forge a <span class="grad-text">digital ticket</span><br/>in one clean pass.
+        </h1>
+        <p class="hero-sub">
+          Validate the guest, pick the event, and the ticket number writes itself. The
+          last five stay ready on this device — no accounts, no servers.
+        </p>
+        <ul class="hero-stats">
+          <li>
+            <strong>3</strong>
+            <span>events</span>
+          </li>
+          <li>
+            <strong>6</strong>
+            <span>char code</span>
+          </li>
+          <li>
+            <strong>5</strong>
+            <span>kept locally</span>
+          </li>
+        </ul>
+      </article>
+
+      <article class="tile tile-form" id="formTile">
+        <header class="tile-head">
+          <h2>Issue a ticket</h2>
+          <p>Validated on submit. Nothing is generated while anything is invalid.</p>
+        </header>
+
+        <form id="ticketForm" class="ticket-form" novalidate>
+          <div class="field" data-field="name">
+            <label for="fullName">Full name</label>
+            <div class="input-wrap">
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                autocomplete="name"
+                placeholder="e.g. Aisha Rahman"
+                maxlength="60"
+                aria-describedby="err-name"
+              />
+              <span class="input-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18">
+                  <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                  <path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </div>
+            <p class="error" id="err-name" role="alert" aria-live="polite"></p>
+          </div>
+
+          <div class="field" data-field="event">
+            <label for="eventSelect">Event</label>
+            <div class="input-wrap">
+              <select id="eventSelect" name="eventSelect" aria-describedby="err-event">
+                <option value="" disabled selected>Choose an event</option>
+                <option value="Web Dev Summit|12 Dec 2026">Web Dev Summit — 12 Dec 2026</option>
+                <option value="AI Bootcamp|19 Dec 2026">AI Bootcamp — 19 Dec 2026</option>
+                <option value="Design Night|26 Dec 2026">Design Night — 26 Dec 2026</option>
+              </select>
+              <span class="input-icon chev" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="16" height="16">
+                  <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </div>
+            <p class="error" id="err-event" role="alert" aria-live="polite"></p>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+              <span>Generate ticket</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <path d="M5 12h14M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button type="button" class="btn btn-ghost" id="resetBtn">Clear</button>
+          </div>
+        </form>
+      </article>
+
+      <article class="tile tile-info">
+        <h3>What gets validated</h3>
+        <ul class="check-list">
+          <li><span class="check-dot ok" aria-hidden="true"></span>Full name: 3–40 characters</li>
+          <li><span class="check-dot ok" aria-hidden="true"></span>Only letters and spaces</li>
+          <li><span class="check-dot ok" aria-hidden="true"></span>An event is selected</li>
+          <li><span class="check-dot ok" aria-hidden="true"></span>Ticket number is unique in your list</li>
+        </ul>
+      </article>
+
+      <article class="tile tile-cta">
+        <h3>Recent tickets</h3>
+        <p>The latest five are stored in <code>localStorage</code> under <code>ticketforge.recent</code>. They survive a refresh.</p>
+        <div class="cta-row">
+          <button class="btn btn-soft" id="clearAllBtn" type="button">Clear all</button>
+        </div>
+      </article>
+    </section>
+
+    <!-- TICKET BENTO -->
+    <section class="bento ticket-section" id="ticketSection" hidden>
+      <article class="tile tile-ticket-head">
+        <div>
+          <h2>Your ticket</h2>
+          <p>Generated just now. Keep the number handy at the door.</p>
+        </div>
+        <span class="badge">Issued</span>
+      </article>
+
+      <article class="ticket" id="ticket" aria-live="polite">
+        <div class="ticket-stub">
+          <div class="stub-top">
+            <span class="brand-mini">TICKET<span>FORGE</span></span>
+            <span class="stub-tag" id="ticketTag">GA</span>
+          </div>
+          <div class="stub-event">
+            <small>Event</small>
+            <strong id="ticketEvent">—</strong>
+          </div>
+          <div class="stub-date">
+            <small>Date</small>
+            <strong id="ticketDate">—</strong>
+          </div>
+          <div class="stub-barcode" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="stub-no" id="ticketNoStub">TKT-——</div>
+        </div>
+
+        <div class="ticket-perf" aria-hidden="true">
+          <div class="perf-line"></div>
+        </div>
+
+        <div class="ticket-main">
+          <div class="ticket-row top">
+            <span class="brand-tag">Admit One</span>
+            <span class="dot-glow" aria-hidden="true"></span>
+          </div>
+
+          <div class="ticket-row name">
+            <small>Guest</small>
+            <h3 id="ticketName">—</h3>
+          </div>
+
+          <div class="ticket-row meta">
+            <div>
+              <small>Event</small>
+              <strong id="ticketEventMeta">—</strong>
+            </div>
+            <div>
+              <small>Date</small>
+              <strong id="ticketDateMeta">—</strong>
+            </div>
+            <div>
+              <small>Issued</small>
+              <strong id="ticketIssued">—</strong>
+            </div>
+          </div>
+
+          <div class="ticket-row bottom">
+            <div class="ticket-no-block">
+              <small>Ticket number</small>
+              <code id="ticketNo">TKT-——</code>
+            </div>
+            <button class="btn btn-copy" id="copyBtn" type="button" aria-label="Copy ticket number">
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                <rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+              </svg>
+              <span id="copyLabel">Copy</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="tile tile-event">
+        <h3>Event essentials</h3>
+        <dl class="event-dl">
+          <div><dt>Venue</dt><dd id="ticketVenue">—</dd></div>
+          <div><dt>Doors</dt><dd>18:30</dd></div>
+          <div><dt>Seat</dt><dd>General Admission</dd></div>
+          <div><dt>Code</dt><dd id="ticketCode">—</dd></div>
+        </dl>
+      </article>
+    </section>
+
+    <!-- RECENT BENTO -->
+    <section class="bento recent-section" id="recent">
+      <article class="tile tile-recent-head">
+        <div>
+          <h2>Recent tickets</h2>
+          <p>Newest first. Saved on this device — survives a refresh.</p>
+        </div>
+        <div class="recent-tools">
+          <div class="search-wrap">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+              <circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M20 20l-4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            <input type="search" id="searchInput" placeholder="Filter by name or number" aria-label="Filter recent tickets" />
+          </div>
+        </div>
+      </article>
+
+      <article class="tile tile-list">
+        <ul class="recent-list" id="recentList" aria-live="polite">
+          <!-- populated by JS -->
+        </ul>
+        <div class="empty" id="emptyState" hidden>
+          <div class="empty-art" aria-hidden="true">
+            <svg viewBox="0 0 64 64" width="56" height="56">
+              <rect x="8" y="14" width="48" height="36" rx="6" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 4"/>
+              <path d="M22 32h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h4>No tickets yet</h4>
+          <p>Issue your first ticket to see it appear here.</p>
+        </div>
+      </article>
+
+    </section>
+
+    <footer class="foot">
+      <span>Built with HTML, CSS, and JavaScript — no libraries.</span>
+      <span class="foot-meta">© Ticket Forge</span>
+    </footer>
+  </main>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
