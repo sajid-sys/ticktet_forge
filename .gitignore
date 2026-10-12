@@ -32,6 +32,3 @@ _check.js
 
 # Installers (the Git and GitHub Desktop .exe files are not part of the project)
 *.exe
-
-# Project notes (kept out of the public repo, lives locally only)
-JAVASCRIPT.md
